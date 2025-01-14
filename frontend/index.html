@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input, button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inventory Tracker</h1>
+    <form id="inventoryForm">
+        <input type="text" id="itemName" placeholder="Item Name" required />
+        <input type="number" id="itemQuantity" placeholder="Quantity" required />
+        <input type="number" id="itemPrice" placeholder="Price" required />
+        <button type="submit">Add Item</button>
+    </form>
+    <h2>Inventory List</h2>
+    <ul id="inventoryList"></ul>
+    <script src="script.js"></script>
+</body>
+</html>
