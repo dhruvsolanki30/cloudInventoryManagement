@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -7,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
@@ -18,17 +19,17 @@ let inventory = [];
 
 // Configure AWS SDK with your credentials
 AWS.config.update({
-    accessKeyId: 'AKIAXQIQABRKEUXXBFF4', // Replace with your AWS Access Key ID
-    secretAccessKey: 'Cny8bT/tCsaDNluK72cgf13tCuec3OXZkHLT4wM6', // Replace with your AWS Secret Access Key
-    region: 'ap-south-1',
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION,
 });
 
 const s3 = new AWS.S3();
-const BUCKET_NAME = 'inventory-tracker-system'; // Replace with your actual S3 bucket name
+const BUCKET_NAME = process.env.S3_BUCKET_NAME;
 
 // Google Sheets API Setup
 const auth = new google.auth.GoogleAuth({
-    keyFile: "C:/Users/solan/Downloads/woven-phoenix-447805-i2-c5e92db1c243.json", // Directly use the absolute path
+    keyFile: process.env.GOOGLE_KEY_FILE_PATH,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
@@ -72,7 +73,7 @@ app.post('/api/inventory', (req, res) => {
 });
 
 async function updateGoogleSheet(item) {
-    const spreadsheetId = '1skJ-IDZCsDqPDrsCbGop4wDcWDQJmBaf7wAhpeXxiqc'; // Replace with your Google Sheets ID
+    const spreadsheetId = process.env.GOOGLE_SHEET_ID; // Replace with your Google Sheets ID
     const range = 'Sheet1!A1'; // Replace with the range where data should go (starting from row 2)
 
     const values = [
