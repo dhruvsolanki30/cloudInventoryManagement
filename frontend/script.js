@@ -1,5 +1,9 @@
 const API_URL = 'http://localhost:3001/api/inventory';
 
+const inventoryForm = document.getElementById('inventoryForm');
+const inventoryList = document.getElementById('inventoryList');
+const emptyMsg = document.getElementById('emptyMsg');
+
 inventoryForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -42,11 +46,20 @@ async function fetchInventory() {
 
 function displayInventory(inventory) {
     inventoryList.innerHTML = '';
-    inventory.forEach((item) => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} - Quantity: ${item.quantity}, Price: $${item.price.toFixed(2)}`;
-        inventoryList.appendChild(li);
-    });
+    if (inventory.length === 0) {
+        emptyMsg.style.display = 'block'; // Show empty message
+    } else {
+        emptyMsg.style.display = 'none'; // Hide empty message
+        inventory.forEach((item) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span class="name">${item.name}</span>
+                <span class="quantity">Qty: ${item.quantity}</span>
+                <span class="price">Price: $${item.price.toFixed(2)}</span>
+            `;
+            inventoryList.appendChild(li);
+        });
+    }
 }
 
 // Fetch inventory on page load

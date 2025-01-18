@@ -1,35 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
             padding: 20px;
         }
-        form {
-            margin-bottom: 20px;
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            color: #4A90E2;
+            margin-bottom: 30px;
         }
-        input, button {
-            margin: 5px;
-            padding: 10px;
+
+        .form-container {
+            background: #ffffff;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .form-container input,
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             font-size: 16px;
+        }
+
+        .form-container input:focus,
+        .form-container button:focus {
+            outline: none;
+            border-color: #4A90E2;
+        }
+
+        .form-container button {
+            background-color: #4A90E2;
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #357ABD;
+        }
+
+        .inventory-list {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 30px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .inventory-list li {
+            background-color: #fff;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .inventory-list li span {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .inventory-list li .price {
+            color: #4A90E2;
+        }
+
+        .inventory-list li .quantity {
+            color: #f39c12;
+        }
+
+        .inventory-list li .name {
+            font-weight: 600;
+        }
+
+        .empty-msg {
+            font-size: 18px;
+            color: #888;
+            text-align: center;
+            width: 100%;
+            margin-top: 50px;
         }
     </style>
 </head>
+
 <body>
     <h1>Inventory Tracker</h1>
-    <form id="inventoryForm">
-        <input type="text" id="itemName" placeholder="Item Name" required />
-        <input type="number" id="itemQuantity" placeholder="Quantity" required />
-        <input type="number" id="itemPrice" placeholder="Price" required />
-        <button type="submit">Add Item</button>
-    </form>
+    <div class="form-container">
+        <form id="inventoryForm">
+            <input type="text" id="itemName" placeholder="Item Name" required />
+            <input type="number" id="itemQuantity" placeholder="Quantity" required />
+            <input type="number" id="itemPrice" placeholder="Price" required />
+            <button type="submit">Add Item</button>
+        </form>
+    </div>
     <h2>Inventory List</h2>
-    <ul id="inventoryList"></ul>
+    <ul id="inventoryList" class="inventory-list"></ul>
+    <p id="emptyMsg" class="empty-msg">No items in inventory yet!</p>
+
     <script src="script.js"></script>
 </body>
+
 </html>
